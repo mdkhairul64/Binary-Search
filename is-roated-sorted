@@ -1,0 +1,112 @@
+/// if an array is sorted by counter clock wise then left side of the pivot is always greater then the pivot 
+// the right side of the pivot is always less then the pivot value
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int findPivot(vector<int>&arr,int low,int high)
+{
+    while(low<=high)
+    {
+        if(low == high)
+        {
+            return low;
+        }
+        int mid = (low+high)/2;
+
+        if(mid < high && arr[mid]>arr[mid+1])
+        {
+            return mid;
+        }
+
+        if( mid > low && arr[mid-1]>arr[mid])
+        {
+            return mid-1;
+        }
+        if(arr[low] >= arr[mid])
+        {
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
+    }
+    return -1;
+}
+
+bool isRoated(vector<int>&arr,int low,int high)
+{
+    int pivot=-1;
+
+    if(arr[low] > arr[high])
+    {
+        pivot=findPivot(arr,low,high);
+        int temp=pivot;
+
+        if(low<pivot)
+        {
+            while(pivot>low)
+            {
+                if(arr[pivot]<arr[pivot-1])
+                {
+                    return false;
+                }
+                pivot--;
+            }
+        }
+
+        pivot=temp;
+
+        if(pivot < high)
+        {
+            pivot++;
+            while(pivot<high)
+            {
+                if(arr[pivot] > arr[pivot+1])
+                {
+                    return false;
+                }
+                pivot++;
+            }
+        }
+        return true;
+
+    }
+    else{
+        return false;
+    }
+}
+
+int main()
+{
+    std::iostream::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cout.tie(0);
+    
+
+    int n;
+    cin>>n;
+
+    vector<int>arr(n);
+
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+
+    
+    //cout<<findPivot(arr,0,n-1);
+
+    if(isRoated(arr,0,n-1))
+    {
+        cout<<"Yes"<<endl;
+    }
+    else{
+        cout<<"NO"<<endl;
+    }
+
+
+
+}
+
+
