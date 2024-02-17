@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// time complexity of this code is O(logN)
+// this is from geeksforgeeks
+
+int minimum(vector<int>&arr,int low,int high)
+{
+
+    // this is for the sorted array
+    // because in the sorted array the first index is in the minimum
+    //so the reeturn the minimum is 0 index
+    if(arr[low] <= arr[high])
+    {
+        return low;
+    }
+    while(low <= high)
+    {
+        int mid= (low + high)/2;
+
+
+        if(mid-1>=0 && arr[mid-1] > arr[mid])
+        {
+            return mid;
+        }
+
+        if(arr[mid] > arr [high])
+        {
+            low=mid+1;
+        }
+        else{
+            high= mid-1;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    std::iostream::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cout.tie(0);
+    
+
+    int n;
+    cin>>n;
+
+
+    
+
+    vector<int>arr(n);
+
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+
+    cout<<minimum(arr,0,n-1);
+    
+
+    return 0;
+
+}
+
