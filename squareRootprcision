@@ -1,0 +1,77 @@
+/// the most part of solving the binaary search is to determine the low and high value otherwise 
+/// i can not solve the problem eaasily
+
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+#define ll long long int 
+
+/// the time complexity is O(logx)
+
+// i do this code for handling the large part of the value like if low=1 and high=10^9 so the 
+// the nth root of the number will be overflow the range 
+
+
+int  sqrtRoot(int n)
+{
+    int low=1,high=n;
+    int ans=1;
+
+   while(low<=high)
+   {
+        int mid=(low+high)/2;
+
+        if((mid*mid)<=n)
+        {
+            ans=mid;
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+   }
+
+   return high;
+}
+
+double sqrtRootPrecision(int precision,int n,int tempSol)
+{
+    double factor=1;
+
+    double ans=tempSol;
+
+    for(int i=0;i<precision;i++)
+    {
+        factor=factor/10;
+
+        for(double j=ans;j*j<n;j+=factor)
+        {
+            ans=j;
+        }
+    }
+
+    return ans;
+}
+
+
+int main()
+{
+    std::iostream::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cout.tie(0);
+
+
+    int n;
+    cin>>n;
+    
+
+    int res=sqrtRoot(n);
+
+    cout<<sqrtRootPrecision(4,n,res); // this will print the result after decimal point
+    //cout<<res<<"\n";
+    return 0;
+}
