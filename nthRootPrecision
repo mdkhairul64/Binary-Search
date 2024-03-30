@@ -1,0 +1,62 @@
+// C++ Program to find
+// n-th real root of x
+#include <bits/stdc++.h>
+using namespace std;
+
+void findNthRoot(double x, int n)
+{
+
+	// Initialize boundary values
+
+	double low, high;
+	if (x >= 0 and x <= 1)
+	{
+		low = x;
+		high = 1;
+	}
+	else
+	{
+		low = 1;
+		high = x;
+	}
+
+	// Used for taking approximations
+	// of the answer
+
+	double epsilon = 0.00000001;
+
+	// Do binary search
+	
+	double mid = (low + high) / 2;
+	while (abs((pow(mid, n)) - x) >= epsilon) 
+	{
+		if (pow(mid, n) > x)
+		{
+			high = mid;
+		}
+		else
+		{
+			low = mid;
+		}
+		mid = (low + high) / 2;
+	}
+
+	cout << fixed << setprecision(2) << mid;
+}
+
+// Driver code
+int main()
+{
+	double x;
+    cin>>x;
+
+
+	int n ;
+    cin>>n;
+	findNthRoot(x, n);
+}
+
+// This code is contributed
+// by Subhadeep and love babar
+// this is from his dsa programme
+
